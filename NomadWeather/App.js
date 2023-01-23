@@ -1,59 +1,80 @@
 import React from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, Button, View, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, Button, View, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function App() {
-  const [text, onChangeText] = React.useState("");
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, backgroundColor: "tomato" }} ></View>
-      <View style={{ flex: 1, backgroundColor: "teal" }} ></View>
-      <View style={{ flex: 1, backgroundColor: "orange" }} ></View>
+    <View style={styles.container}>
+      <StatusBar style="dark" />
+
+      <View style={styles.city}>
+        <Text style={styles.cityName}>SEOUL</Text>
+      </View>
+
+      <ScrollView 
+        horizontal 
+        pagingEnabled 
+        // indicatorStyle = "black"       
+        showsHorizontalScrollIndicator={false} 
+        contentContainerStyle={styles.weather}
+      >
+        <View style={styles.day}>
+          <Text style={styles.temp}>27</Text>
+          <Text style={styles.desc}>Sunny</Text>
+        </View>
+        <View style={styles.day}>
+          <Text style={styles.temp}>23</Text>
+          <Text style={styles.desc}>Sunny</Text>
+        </View>
+        <View style={styles.day}>
+          <Text style={styles.temp}>20</Text>
+          <Text style={styles.desc}>Cloudy</Text>
+        </View>
+        <View style={styles.day}>
+          <Text style={styles.temp}>13</Text>
+          <Text style={styles.desc}>Rain</Text>
+        </View>
+      </ScrollView >
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    flex: 1, 
+    backgroundColor: 'skyblue'
+  },
+
+  city: {
+    flex: .7,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 24,
+  cityName: {
+    fontSize: 68,
+    fontWeight: "600",
   },
-  loginBtn: {
-    color: "#06bcee"
+
+  weather: {
+    // flex: 4,
+    backgroundColor: 'white',
   },
-  input: {
-    width: 250,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  day: {
+    // flex: 1,
+    width: SCREEN_WIDTH,
+    paddingLeft: 50
+  },
+  temp: {
+    fontSize: 180,
+    fontWeight: "800",
+    marginTop: 30
+  },
+  desc: {
+    fontSize: 50,
   }
+
 });
 
-/*
-*
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello React Native</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-        textContentType="emailAddress"
-        placeholder="Email"
-      />
-      <Button
-        title="LOGIN"
-        style={styles.loginBtn}
-        onPress={() => Alert.alert('Logging in...')}
-      />
-
-      <StatusBar style="auto" />
-    </View>
-*
-*/
